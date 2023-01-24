@@ -3,6 +3,10 @@ import { Theme } from "@mui/material/styles";
 
 interface CustomTheme {
   custom: {
+    font: {
+      sans: string;
+      secondary?: string;
+    };
     // border radius
     br: {
       xs: string;
@@ -23,6 +27,12 @@ interface CustomTheme {
     };
 
     breakpoints: {
+      sm: string;
+      md: string;
+      lg: string;
+    };
+
+    shadow: {
       sm: string;
       md: string;
       lg: string;
