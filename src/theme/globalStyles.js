@@ -1,11 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-
     *, *::after, *::before {
         box-sizing: border-box;
     }
     body {
+        font-family: ${({ theme }) => theme.custom.font.sans};
+        color: ${({ theme }) => theme.custom.colors.text900};
         padding: 0;
         margin: 0;
     }
