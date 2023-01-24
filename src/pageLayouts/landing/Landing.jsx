@@ -1,20 +1,20 @@
 import { StyledWrapper } from "./LandingLayout.styled";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { Hero } from "../../components/landingComponents/hero/Hero";
+import { Cards } from "../../components/landingComponents/cards/Cards";
 
 export default function Landing() {
   return (
     <StyledWrapper>
       {/* Header */}
-      CONTENT
-      <Stack spacing={2} direction="row">
-        <Button variant="text">Text</Button>
-        <Button color="secondary" variant="contained">
-          Contained
-        </Button>
-        <Button variant="outlined">Outlined</Button>
-      </Stack>
-      {/* Footer */}
+      <section>
+        <Hero />
+      </section>
+
+      <section>
+        <Cards />
+      </section>
     </StyledWrapper>
   );
 }
