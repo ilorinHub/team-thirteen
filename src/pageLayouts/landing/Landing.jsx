@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { Hero } from "../../components/landingComponents/hero/Hero";
 import { Cards } from "../../components/landingComponents/cards/Cards";
+import FeaturesGrid from "../../components/landingComponents/featuresGrid/FeaturesGrid";
 
 export default function Landing() {
   return (
@@ -14,6 +15,10 @@ export default function Landing() {
 
       <section>
         <Cards />
+      </section>
+
+      <section>
+        <FeaturesGrid />
       </section>
     </StyledWrapper>
   );
