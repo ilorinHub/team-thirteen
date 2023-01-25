@@ -40,3 +40,4 @@ yarn.lock
 *.lock
 yarn.lock
 yarn.lock
+*.lock
