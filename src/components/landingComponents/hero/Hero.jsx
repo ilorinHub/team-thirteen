@@ -11,7 +11,7 @@ export const Hero = () => {
     >
       <StyledWrapper>
         <div className="hero_content">
-          <p>Project Monitoring App</p>
+          <p>Project Monitoring Apps</p>
 
           <h1>The ultimate project tracking tool.</h1>
         </div>
