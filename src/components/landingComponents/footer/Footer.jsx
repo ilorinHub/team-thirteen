@@ -1,4 +1,4 @@
-import { Box, Divider } from "@mui/material";
+import { Divider } from "@mui/material";
 import {
   StyledWrapper,
   StyledBody,
