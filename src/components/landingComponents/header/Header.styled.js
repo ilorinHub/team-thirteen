@@ -8,6 +8,12 @@ export const StyledWrapper = styled.div`
   padding-top: 14px;
   padding-bottom: 25px;
   color: ${({ theme }) => theme.custom.colors.text900};
+  .header-text {
+    font-weight: 600;
+    text-transform: none;
+    font-size: 14px;
+    color: ${({ theme }) => theme.custom.colors.text900};
+  }
 `;
 export const StyledButton = styled(Button)`
   border-radius: 24px;

@@ -33,7 +33,7 @@ export const Header = () => {
           justifyContent="center"
           flexDirection="column"
         >
-          <label>Features</label>
+          Features
         </Grid>
         <Grid
           item
@@ -46,7 +46,7 @@ export const Header = () => {
             aria-controls="language-menu"
             onClick={handleClick}
             endIcon={<KeyboardArrowDown />}
-            sx={{ textTransform: "none", color: "white" }}
+            className="header-text"
           >
             {language}
           </Button>
