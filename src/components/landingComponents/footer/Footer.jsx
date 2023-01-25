@@ -22,7 +22,7 @@ export const Footer = () => {
           <FooterLink>Lawrdev</FooterLink>
         </FooterLinkWrapper>
       </StyledBody>
-      <CopyrightText>c2023</CopyrightText>
+      <CopyrightText>&copy; 2023</CopyrightText>
     </StyledWrapper>
   );
 };
