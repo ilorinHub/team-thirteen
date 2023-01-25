@@ -24,7 +24,7 @@ const FeatureGrid = ({ title, subtitle, tagText, reverse, image }) => (
           <path
             d='M15.5 7.25L8.625 14.125L5.5 11'
             stroke='#15AABF'
-            stroke-linecap='round'
+            strokeLinecap='round'
             stroke-linejoin='round'
           />
         </svg>
