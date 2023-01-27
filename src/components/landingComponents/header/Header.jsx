@@ -1,4 +1,5 @@
 import { useState, React } from "react";
+import { useRouter } from "next/router";
 import { StyledWrapper, StyledButton } from "./Header.styled";
 import Ellipse from "./assets/img/ellipse.svg";
 import Image from "next/image";
@@ -9,6 +10,7 @@ import Fade from "@mui/material/Fade";
 export const Header = () => {
   const [language, setLanguage] = useState("English");
   const [anchorEl, setAnchorEl] = useState(null);
+  const router = useRouter();
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -70,7 +72,7 @@ export const Header = () => {
             textAlign: "right",
           }}
         >
-          <StyledButton variant="contained" endIcon={<KeyboardArrowRight />}>
+          <StyledButton onClick={() => router.push('/dashboard')} variant="contained" endIcon={<KeyboardArrowRight />}>
             App
           </StyledButton>
         </Grid>

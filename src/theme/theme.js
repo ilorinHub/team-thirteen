@@ -14,7 +14,7 @@ export const theme = createTheme({
   //create custom theme
   custom: {
     font: {
-      sans: `'Red Hat Display', sans-serif`,
+      sans: `'Open Sans', sans-serif`,
     },
 
     br: {
@@ -40,9 +40,9 @@ export const theme = createTheme({
     },
 
     shadow: {
-      sm: "box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);",
-      md: "box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);",
-      lg: "box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);",
+      sm: " 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+      md: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+      lg: " 0 25px 50px -12px rgb(0 0 0 / 0.25)",
     },
   },
 });

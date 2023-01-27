@@ -8,9 +8,7 @@ import FeaturesGrid from "../../components/landingComponents/featuresGrid/Featur
 export default function Landing() {
   return (
     <StyledWrapper>
-      <section>
-        <Header />
-      </section>{" "}
+      <Header />
       <section>
         <Hero />
       </section>
@@ -20,9 +18,7 @@ export default function Landing() {
       <section>
         <FeaturesGrid />
       </section>
-      <section>
-        <Footer />
-      </section>
+      <Footer />
     </StyledWrapper>
   );
 }
