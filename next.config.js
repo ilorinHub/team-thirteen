@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false,
-  swcMinify: true,
+  reactStrictMode: true,
+  // swcMinify: true,
 }
 
 // module.exports = {
@@ -13,9 +13,9 @@ const nextConfig = {
 // }
 
 module.exports = {
-  compiler: {
-    // ssr and displayName are configured by default
-    styledComponents: true,
-  },
+  // compiler: {
+  //   // ssr and displayName are configured by default
+  //   styledComponents: true,
+  // },
   ...nextConfig
 }
