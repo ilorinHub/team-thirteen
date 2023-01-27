@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../src/createEmotionCache';
+import { CssBaseline } from '@mui/material';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -45,8 +46,8 @@ function MyApp({
 }) {
   return (
     <>
-      <Provider store={store}>
-        <CacheProvider value={emotionCache}>
+      <CacheProvider value={emotionCache}>
+        <Provider store={store}>
           <Head>
             <meta
               name='viewport'
@@ -56,11 +57,12 @@ function MyApp({
           <ReactReduxFirebaseProvider {...rrfProps}>
             <ThemeProvider theme={theme}>
               <GlobalStyles />
+              <CssBaseline />
               <Component {...pageProps} />
             </ThemeProvider>
           </ReactReduxFirebaseProvider>
-        </CacheProvider>
-      </Provider>
+        </Provider>
+      </CacheProvider>
     </>
   );
 }
