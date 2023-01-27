@@ -14,7 +14,7 @@ export const theme = createTheme({
   //create custom theme
   custom: {
     font: {
-      sans: `'Red Hat Display', sans-serif`,
+      sans: `'Open Sans', sans-serif`,
     },
 
     br: {
