@@ -1,8 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import OnBoading from '../src/pageLayouts/onboarding/OnBoading';
 import { useFirestore } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useRouter } from 'next/router';
+
+const convertToArrayOfObjects = (obj) =>
+  obj && Object?.entries(obj)?.map(([id, value]) => ({ id, ...value }));
 
 export default function Onboarding() {
+  useFirestoreConnect(['users', 'workspace', 'team']);
+  const { users, workspace, team } = useSelector(
+    (state) => state.firestoreReducer.data
+  );
+  const auth = useSelector((state) => state.firebaseReducer.auth);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (auth?.uid) {
+      const user = convertToArrayOfObjects(users)?.filter(
+        (u) => u.id === auth.uid
+      )[0];
+      const userWorkspace = convertToArrayOfObjects(workspace)?.filter(
+        (w) => w.id === user?.workspaceId
+      )[0];
+      const userTeam = convertToArrayOfObjects(team)?.filter(
+        (t) => t.id === user?.teamId
+      )[0];
+      setOnboardingData({
+        ...onboardingData,
+        displayName: auth?.displayName,
+        email: auth?.email,
+        role: user?.role,
+        designation: user?.designation,
+        uid: auth?.id,
+        workspaceId: user?.workspaceId,
+        teamId: user?.teamId,
+        workspaceName: userWorkspace?.name,
+        teamName: userTeam?.name,
+        teamType: userTeam?.type,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth.uid, workspace, team, users]);
+
   const firestore = useFirestore();
   const [step, setStep] = useState(0);
   const [onboardingData, setOnboardingData] = useState({
@@ -12,7 +53,11 @@ export default function Onboarding() {
     role: 'admin',
     designation: '',
     teamName: '',
+    teamType: '',
     teamMembers: [],
+    workspaceId: '',
+    teamId: '',
+    uid: '',
   });
 
   const handleChanges = (e) => {
@@ -28,7 +73,6 @@ export default function Onboarding() {
   };
 
   const handleComplete = async () => {
-    console.log('onboardingData', onboardingData);
     // Create workspace
     const newWorkspace = {
       name: onboardingData.workspaceName,
@@ -41,9 +85,14 @@ export default function Onboarding() {
         .collection('workspace')
         .add(newWorkspace);
       console.log(fireWorkspace?.id);
+      setOnboardingData({
+        ...onboardingData,
+        workspaceId: fireWorkspace?.id,
+      });
       // Create team
       const newTeam = {
         name: onboardingData.teamName,
+        type: onboardingData.teamType,
         createdAt: new Date(),
         createdBy: onboardingData.email,
         members: [onboardingData.email],
@@ -51,6 +100,11 @@ export default function Onboarding() {
       };
       const fireTeam = await firestore.collection('team').add(newTeam);
       console.log(fireTeam?.id);
+      setOnboardingData({
+        ...onboardingData,
+        teamId: fireTeam?.id,
+      });
+
       // Update workspace
       const updatedWorkspace = {
         ...newWorkspace,
@@ -59,7 +113,8 @@ export default function Onboarding() {
       await firestore
         .collection('workspace')
         .doc(fireWorkspace?.id)
-        .set(updatedWorkspace);
+        .update(updatedWorkspace);
+
       // Update user
       const newUser = {
         displayName: onboardingData.displayName,
@@ -69,23 +124,48 @@ export default function Onboarding() {
         workspaceId: fireWorkspace?.id,
         teamId: fireTeam?.id,
       };
-      await firestore.collection('users').doc(onboardingData.uid).set(newUser);
-      // save team members
-      const teamMembers = onboardingData.teamMembers.map((member) => {
-        return {
-          email: member,
-          workspaceId: fireWorkspace?.id,
-          teamId: fireTeam?.id,
-          teamName: onboardingData.teamName,
-          workspaceName: onboardingData.workspaceName,
-          displayName: onboardingData.displayName,
-          workspaceOwner: onboardingData.email,
-        };
+      await firestore
+        .collection('users')
+        .doc(onboardingData.uid)
+        .update(newUser);
+      setStep(3);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const inviteTeamMembers = async () => {
+    const {
+      teamMembers,
+      teamId,
+      workspaceId,
+      teamName,
+      workspaceName,
+      displayName,
+      email,
+      teamType,
+    } = onboardingData;
+    const newTeamMembers = teamMembers.filter((member) => member !== '');
+    const newTeamMembersData = newTeamMembers.map((member) => ({
+      email: member,
+      role: 'member',
+      workspaceId,
+      teamId,
+      teamName,
+      teamType,
+      workspaceName,
+      invitedBy: displayName,
+      workspaceOwner: email,
+      createdAt: new Date(),
+    }));
+    try {
+      const batch = firestore.batch();
+      newTeamMembersData.forEach((member) => {
+        const newMemberRef = firestore.collection('invitee_emails').doc();
+        batch.set(newMemberRef, member);
       });
-      teamMembers.forEach(async member => {
-        await firestore.collection('invitee_emails').add(member)
-      });
-      ;
+      await batch.commit();
+      router.push('/dashboard');
     } catch (error) {
       console.log(error);
     }
@@ -99,6 +179,7 @@ export default function Onboarding() {
       handleChanges={handleChanges}
       setOnboardingData={setOnboardingData}
       handleComplete={handleComplete}
+      inviteTeamMembers={inviteTeamMembers}
     />
   );
 }
