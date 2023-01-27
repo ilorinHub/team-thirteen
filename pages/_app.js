@@ -1,69 +1,26 @@
-import '../src/styles/globals.css';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../src/theme/theme';
-import { GlobalStyles } from '../src/theme/globalStyles';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Head from 'next/head';
 import { CacheProvider } from '@emotion/react';
-import createEmotionCache from '../src/createEmotionCache';
+import { ThemeProvider, CssBaseline } from '@mui/material';
 
-// Client-side cache, shared for the whole session of the user in the browser.
+import createEmotionCache from '../utility/createEmotionCache';
+import lightTheme from '../styles/theme/lightTheme';
+import '../styles/globals.css';
+
 const clientSideEmotionCache = createEmotionCache();
 
-// Firebase immports
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
-import firebaseConfig from '../src/firebase/config';
+const MyApp = (props) => {
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
-// Redux imports
-import { Provider } from 'react-redux';
-import { store } from '../src/redux/store';
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import { createFirestoreInstance } from 'redux-firestore';
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.firestore();
-
-const rrfConfig = {
-  userProfile: 'users',
-  useFirestoreForProfile: true,
-};
-
-const rrfProps = {
-  firebase,
-  config: rrfConfig,
-  dispatch: store.dispatch,
-  createFirestoreInstance,
-};
-
-function MyApp({
-  Component,
-  pageProps,
-  emotionCache = clientSideEmotionCache,
-}) {
   return (
-    <>
-      <Provider store={store}>
-        <CacheProvider value={emotionCache}>
-          <Head>
-            <meta
-              name='viewport'
-              content='initial-scale=1, width=device-width'
-            />
-          </Head>
-          <ReactReduxFirebaseProvider {...rrfProps}>
-            <ThemeProvider theme={theme}>
-              <GlobalStyles />
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </ReactReduxFirebaseProvider>
-        </CacheProvider>
-      </Provider>
-    </>
+    <CacheProvider value={emotionCache}>
+      <ThemeProvider theme={lightTheme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </CacheProvider>
   );
-}
+};
 
 export default MyApp;
 
