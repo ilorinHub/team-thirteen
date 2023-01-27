@@ -24,7 +24,7 @@ import {
   StyledInputBase,
 } from "../Navbar.styled";
 
-export const MobileNavbar = () => {
+export const MobileNavbar = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -142,6 +142,7 @@ export const MobileNavbar = () => {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={props.handleDrawerToggle}
           >
             <MenuIcon />
           </IconButton>

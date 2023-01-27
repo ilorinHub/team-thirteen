@@ -5,6 +5,30 @@ export const StyledButton = styled(Button)`
   border-radius: 4px;
   text-transform: none;
 `;
+
+export const StyledUnselectedNavMenu = styled(Button)`
+  text-transform: none;
+  padding-left: 32px;
+  color: #475467;
+  font-size: 16px;
+  font-weight: 500;
+  justify-content: left;
+  margin-bottom: 14px;
+  background: #f4f5f7;
+  border-radius: 0px;
+`;
+
+export const StyledSelectedNavMenu = styled(Button)`
+  border-radius: 4px;
+  text-transform: none;
+  margin-left: 20px;
+  margin-bottom: 6px;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  justify-content: left;
+`;
+
 export const Search = styled.div`
   position: relative;
   color: #98a2b3;
