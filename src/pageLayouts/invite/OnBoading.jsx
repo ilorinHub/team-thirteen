@@ -9,10 +9,8 @@ import {
   StyledSideBar,
   StyledWrapper,
 } from './OnBoardingLayout.styled';
-import Welcome from '../../components/onBoardComponents/welcome/Welcome';
-import SetupProfile from '../../components/onBoardComponents/profile/SetupProfile';
-import Introduce from '../../components/onBoardComponents/introduce/Introduce';
-import Invite from '../../components/onBoardComponents/invite/Invite';
+import SetupProfile from '../../components/inviteComponents/profile/SetupProfile';
+import Introduce from '../../components/inviteComponents/introduce/Introduce';
 
 export default function OnBoading({
   step,
@@ -21,10 +19,8 @@ export default function OnBoading({
   handleChanges,
   setOnboardingData,
   handleComplete,
-  inviteTeamMembers,
 }) {
-  const { workspaceName, displayName, designation, teamName, teamMembers } =
-    onboardingData;
+  const { displayName, designation, teamType } = onboardingData;
 
   const firebase = useFirebase();
   const auth = useSelector((state) => state.firebaseReducer.auth);
@@ -69,16 +65,6 @@ export default function OnBoading({
 
   const renderStep = (step) => {
     switch (step) {
-      case 0:
-        return (
-          <Welcome
-            name='workspaceName'
-            value={workspaceName}
-            onChange={handleChanges}
-            handleContinue={handleContinue}
-            signedIn={signedIn}
-          />
-        );
       case 1:
         return (
           <SetupProfile
@@ -92,21 +78,12 @@ export default function OnBoading({
         return (
           <div>
             <Introduce
-              teamName={teamName}
               onChange={handleChanges}
               onSubmit={handleComplete}
+              teamType={teamType}
+              designation={designation}
             />
           </div>
-        );
-      case 3:
-        return (
-          <Invite
-            handleChanges={handleChanges}
-            teamMembers={teamMembers}
-            setOnboardingData={setOnboardingData}
-            onboardingData={onboardingData}
-            inviteTeamMembers={inviteTeamMembers}
-          />
         );
       default:
         return null;
@@ -254,18 +231,6 @@ export default function OnBoading({
             <h1>ProjeX</h1>
           </div>
           <ul>
-            <StyledNavItem active={step === 0} onClick={() => setStep(0)}>
-              <h3>
-                {workspaceName && step !== 0
-                  ? workspaceName
-                  : 'Create workspace'}
-              </h3>
-              <p>
-                {workspaceName && step !== 0
-                  ? 'Your team has a new home!'
-                  : 'Give your new home a name.'}
-              </p>
-            </StyledNavItem>
             <StyledNavItem active={step === 1} onClick={() => setStep(1)}>
               <h3>{displayName ? displayName : 'Create your Profile'}</h3>
               <p>
@@ -275,18 +240,8 @@ export default function OnBoading({
               </p>
             </StyledNavItem>
             <StyledNavItem active={step === 2} onClick={() => setStep(2)}>
-              <h3>
-                {teamName && step !== 2 ? teamName : 'Tell us about your team'}
-              </h3>
-              <p>
-                {designation && step !== 2
-                  ? `As ${designation} in ${teamName}, you will enjoy using ProjeX`
-                  : 'Tailor your ProjeX experience'}
-              </p>
-            </StyledNavItem>
-            <StyledNavItem active={step === 3} onClick={() => setStep(3)}>
-              <h3>Invite your team</h3>
-              <p>We recommend exploring ProjeX with your team.</p>
+              <h3>Join your team</h3>
+              <p>Start relishing the ProjeX experience</p>
             </StyledNavItem>
           </ul>
         </StyledSideBar>

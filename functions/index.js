@@ -20,8 +20,8 @@ exports.sendInviteMail = functions.firestore
     const workspaceId = newValue.workspaceId;
     const teamName = newValue.teamName;
     const workspaceName = newValue.workspaceName;
-    const displayName = newValue.displayName;
-    const workspaceOwner = newValue.workspaceOwner;
+    const invitedBy = newValue.invitedBy;
+    const teamType = newValue.teamType;
 
     // send email
     const mailRef = db.collection('mail').doc();
@@ -30,13 +30,28 @@ exports.sendInviteMail = functions.firestore
       message: {
         subject: `Invite to Join ${teamName} on ${workspaceName}`,
         html: `
-        Hey ${displayName || ''}! 👋
-       You have just being invited to collaborate with ${teamName} on ${workspaceName} by ${workspaceOwner}.
+        Hey there! 👋
+        <br />
+        <br />
+       You have just being invited to collaborate as a team member of ${teamName} on ${workspaceName}'s workspace by ${invitedBy}.
+       <br />
+       <br />
        Click the button below to join the team.
-       <a href="https://byte-me-ng.firebaseapp.com/invite/${teamId}/${workspaceId}?email=${email}">Join ${teamName}</a>
+        <br />
+        <br />
+       <a href="https://byte-me-ng.firebaseapp.com/invite?workspace=${workspaceId}&team=${teamId}&teamType=${encodeURIComponent(
+          teamType
+        )}">Join ${teamName}</a>
+       <br />
+       <br />
        If you have any questions, please contact us at
        <a href="mailto:haywhyze@gmail.com">help@byte-me-ng.firebaseapp.com</a>
+       <br />
+       <br />
        Thanks,
+       <br />
+       <br />
+
        The ByteMe Team
      `, // html body
       },

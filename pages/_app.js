@@ -15,6 +15,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import firebaseConfig from '../src/firebase/config';
+import { getFirestore } from "firebase/firestore";
 
 // Redux imports
 import { Provider } from 'react-redux';
@@ -23,8 +24,10 @@ import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 firebase.firestore();
+// Initialize Cloud Firestore and get a reference to the service
+export const db = getFirestore(app);
 
 const rrfConfig = {
   userProfile: 'users',
