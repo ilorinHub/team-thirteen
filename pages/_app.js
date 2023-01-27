@@ -2,6 +2,14 @@ import '../src/styles/globals.css';
 import { ThemeProvider } from 'styled-components';
 import { theme } from '../src/theme/theme';
 import { GlobalStyles } from '../src/theme/globalStyles';
+import PropTypes from 'prop-types';
+import Head from 'next/head';
+import CssBaseline from '@mui/material/CssBaseline';
+import { CacheProvider } from '@emotion/react';
+import createEmotionCache from '../src/createEmotionCache';
+
+// Client-side cache, shared for the whole session of the user in the browser.
+const clientSideEmotionCache = createEmotionCache();
 
 // Firebase immports
 import firebase from 'firebase/compat/app';
@@ -31,19 +39,38 @@ const rrfProps = {
   createFirestoreInstance,
 };
 
-function MyApp({ Component, pageProps }) {
+function MyApp({
+  Component,
+  pageProps,
+  emotionCache = clientSideEmotionCache,
+}) {
   return (
     <>
       <Provider store={store}>
-        <ReactReduxFirebaseProvider {...rrfProps}>
-          <ThemeProvider theme={theme}>
-            <GlobalStyles />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </ReactReduxFirebaseProvider>
+        <CacheProvider value={emotionCache}>
+          <Head>
+            <meta
+              name='viewport'
+              content='initial-scale=1, width=device-width'
+            />
+          </Head>
+          <ReactReduxFirebaseProvider {...rrfProps}>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <GlobalStyles />
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </ReactReduxFirebaseProvider>
+        </CacheProvider>
       </Provider>
     </>
   );
 }
 
 export default MyApp;
+
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  emotionCache: PropTypes.object,
+  pageProps: PropTypes.object.isRequired,
+};
