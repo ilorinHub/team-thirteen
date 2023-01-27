@@ -4,7 +4,6 @@ import { theme } from '../src/theme/theme';
 import { GlobalStyles } from '../src/theme/globalStyles';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider } from '@emotion/react';
 import createEmotionCache from '../src/createEmotionCache';
 
@@ -56,7 +55,6 @@ function MyApp({
           </Head>
           <ReactReduxFirebaseProvider {...rrfProps}>
             <ThemeProvider theme={theme}>
-              <CssBaseline />
               <GlobalStyles />
               <Component {...pageProps} />
             </ThemeProvider>

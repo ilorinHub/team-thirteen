@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/cache": "^11.10.5",
+    "@emotion/react": "^11.10.5",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.5",
+    "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.6",
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
@@ -25,11 +30,9 @@
     "react-redux-firebase": "^3.11.0",
     "redux": "^4.2.0",
     "redux-firestore": "^1.0.0",
+    "sharp": "^0.31.3",
     "styled-components": "^5.3.6",
-    "@emotion/cache": "latest",
-    "@emotion/react": "latest",
-    "@emotion/server": "latest",
-    "@emotion/styled": "latest"
+    "typescript": "^4.9.4"
   },
   "resolutions": {
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
