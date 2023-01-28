@@ -26,43 +26,47 @@ export const SidebarMenu = () => {
   const menu1 = [
     {
       title: "Home",
-      url: "dashboard",
+      url: "/dashboard",
       icon: <Home />,
     },
 
     {
       title: "Projects",
-      url: "projects",
+      url: "/projects",
       icon: <GridView />,
     },
     {
       title: "Issues",
-      url: "projects",
+      url: "/projects",
       icon: <DataObject />,
     },
     {
       title: "Messages",
-      url: "projects",
+      url: "/projects",
       icon: <Mail />,
     },
     {
       title: "Roadmap",
-      url: "projects",
+      url: "/projects",
+
       icon: <Map />,
     },
     {
       title: "Teams",
-      url: "projects",
+      url: "/projects",
+
       icon: <Groups />,
     },
     {
       title: "Reports",
-      url: "projects",
+      url: "/projects",
+
       icon: <Analytics />,
     },
     {
       title: "Labels",
-      url: "projects",
+      url: "/projects",
+
       icon: <Label />,
     },
   ];
@@ -76,17 +80,20 @@ export const SidebarMenu = () => {
 
     {
       title: "Integrations",
-      url: "projects",
+      url: "/projects",
+
       icon: <IntegrationInstructions />,
     },
     {
       title: "Help",
-      url: "projects",
+      url: "/projects",
+
       icon: <Language />,
     },
     {
       title: "Invite Users",
-      url: "projects",
+      url: "/projects",
+
       icon: <GroupAdd />,
     },
   ];
@@ -120,17 +127,8 @@ export const SidebarMenu = () => {
 
   return (
     <div>
-      {
-        <SelectedMenu
-          title={menu1[0].title}
-          icon={menu1[0].icon}
-          key={0}
-          url={menu1[0].url}
-          id="defaultMenu"
-        />
-      }
       {menu1.map((item, i) =>
-        router.pathname === item.url ? (
+        i == 0 && router.pathname === item.url ? (
           <SelectedMenu
             title={item.title}
             icon={item.icon}
