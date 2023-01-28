@@ -56,7 +56,10 @@ export const DesktopNavbar = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ background: "#1D2939", color: "white" }}>
+      <AppBar
+        position="fixed"
+        sx={{ background: "#1D2939", color: "white", boxShadow: 0 }}
+      >
         <Toolbar>
           <Image
             src={Icon}
