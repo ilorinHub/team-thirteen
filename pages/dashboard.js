@@ -10,7 +10,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (isLoaded(auth) && isEmpty(auth)) {
-      router.replace('/onboarding');
+      router.replace('/login');
     }
   }, [auth, router]);
 
