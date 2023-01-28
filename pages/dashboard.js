@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { Navbar } from '../src/components/dashboardComponents/navbar/Navbar';
 
 const Dashboard = () => {
   const auth = useSelector((state) => state?.firebaseReducer?.auth);
@@ -14,11 +15,11 @@ const Dashboard = () => {
   }, [auth, router]);
 
   if (!isLoaded(auth)) {
-    return <div>Loading...</div>;
+    return null;
   }
   return (
     <div>
-      <h1 style={{ color: 'black' }}>Dashboard</h1>
+      <Navbar />
     </div>
   );
 };
