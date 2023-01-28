@@ -89,7 +89,10 @@ export const Sidebar = (props) => {
           border: "none",
           p: 3,
           width: { md: `calc(100% - ${drawerWidth}px)` },
-          background: "#f4f5f7",
+          padding: 0,
+          margin: 0,
+
+          marginTop: { md: "100px" },
         }}
       >
         {props.mainContent}

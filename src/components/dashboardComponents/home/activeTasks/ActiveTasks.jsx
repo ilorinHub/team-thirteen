@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import { MenuItem, Select } from "@mui/material";
 import { ProjectCard } from "../projectCard/ProjectCard";
 
-export const Projects = () => {
+export const ActiveTasks = () => {
   const [showing, setShowing] = useState("unfinished");
 
   return (
@@ -17,7 +17,7 @@ export const Projects = () => {
         }}
       >
         <p style={{ fontWeight: 500, fontSize: 20, color: "#101828" }}>
-          My Projects
+          My Active Tasks
         </p>
         <p style={{ marginTop: "12px" }}>
           <label style={{ fontSize: 16, fontWeight: 400, marginRight: "16px" }}>
@@ -33,8 +33,8 @@ export const Projects = () => {
             }}
             sx={{ height: 32, width: 160, fontSize: "14px" }}
           >
-            <MenuItem value={"unfinished"}>Unfinished Only</MenuItem>
-            <MenuItem value={"finished"}>Finished Only</MenuItem>
+            <MenuItem value={"unfinished"}>Started Only</MenuItem>
+            <MenuItem value={"finished"}>Pending Only</MenuItem>
             <MenuItem value={"everything"}>Everything</MenuItem>
           </Select>
         </p>
