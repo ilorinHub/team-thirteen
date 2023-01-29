@@ -1,20 +1,22 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.main`
-    position: relative;
+    min-height: 100vh;
+    background-color: #F9FAFB;
     padding: 20px; // remove padding after implementing
 `;
 
 export const StyledHeader = styled.h2`
     margin: 20px 0;
-    font-weight: 500;
-    font-size: 18px;
+    font-weight: 700;
+    font-size: 20px;
     line-height: 28px;
 
     color: #000000;
 `;
 
 export const StyledTopOptions = styled.div`
+    margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
