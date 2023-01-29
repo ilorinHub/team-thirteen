@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -21,17 +21,33 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import {
   ArrowDropDown,
+  DashboardRounded,
+  ListAltRounded,
   Notifications,
+  PeopleAltRounded,
   Schedule,
   School,
 } from '@mui/icons-material';
-import { AppBar } from '@mui/material';
+import { AppBar, CircularProgress, MenuItem } from '@mui/material';
+import CreateProjectModal from '../../CreateProjectModal';
 
 export const DesktopNavbar = ({ signOut }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorCreate, setAnchorCreate] = useState(null);
   const auth = useSelector((state) => state?.firebaseReducer?.auth);
   const { displayName, photoURL, email } = auth;
+
   const isMenuOpen = Boolean(anchorEl);
+  const isCreateOpen = Boolean(anchorCreate);
+
+  const handleCreateMenuOpen = (event) => {
+    setAnchorCreate(event.currentTarget);
+  };
+
+  const handleCreateMenuClose = () => {
+    setAnchorCreate(null);
+  };
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -40,6 +56,8 @@ export const DesktopNavbar = ({ signOut }) => {
   };
 
   const menuId = 'primary-search-account-menu';
+  const createId = 'create-project-menu';
+
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -48,7 +66,6 @@ export const DesktopNavbar = ({ signOut }) => {
         horizontal: 'right',
       }}
       id={menuId}
-      keepMounted
       transformOrigin={{
         vertical: 'top',
         horizontal: 'right',
@@ -58,7 +75,7 @@ export const DesktopNavbar = ({ signOut }) => {
       sx={{ marginTop: '40px' }}
     >
       <Card sx={{ maxWidth: 345, marginBottom: '-10px' }}>
-        <CardMedia
+        {photoURL ? <CardMedia
           sx={{
             height: 80,
             width: 80,
@@ -69,7 +86,7 @@ export const DesktopNavbar = ({ signOut }) => {
           }}
           image={photoURL}
           title='user avatar'
-        />
+        />: <CircularProgress />}
         <CardContent sx={{ textAlign: 'center' }}>
           <Typography gutterBottom variant='h6' component='div'>
             {displayName}
@@ -92,6 +109,38 @@ export const DesktopNavbar = ({ signOut }) => {
     </Menu>
   );
 
+  const renderCreate = (
+    <Menu
+      anchorEl={anchorCreate}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'left',
+      }}
+      id={createId}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'left',
+      }}
+      open={isCreateOpen}
+      onClose={handleCreateMenuClose}
+      sx={{ marginTop: '40px' }}
+    >
+      <MenuItem>
+        <CreateProjectModal />
+      </MenuItem>
+      <MenuItem>
+        <Button sx={{ textTransform: 'none' }} color='inherit' size='small'>
+          <ListAltRounded sx={{ marginRight: '10px' }} /> Create Task
+        </Button>
+      </MenuItem>
+      <MenuItem>
+        <Button sx={{ textTransform: 'none' }} color='inherit' size='small'>
+          <PeopleAltRounded sx={{ marginRight: '10px' }} /> Create Team
+        </Button>
+      </MenuItem>
+    </Menu>
+  );
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static' sx={{ background: '#1D2939', color: 'white' }}>
@@ -107,6 +156,7 @@ export const DesktopNavbar = ({ signOut }) => {
             variant='contained'
             endIcon={<ArrowDropDown />}
             style={{ marginRight: '50px', color: 'white' }}
+            onClick={handleCreateMenuOpen}
           >
             Create Project
           </StyledButton>
@@ -208,6 +258,7 @@ export const DesktopNavbar = ({ signOut }) => {
         </Toolbar>
       </AppBar>
       {renderMenu}
+      {renderCreate}
     </Box>
   );
 };

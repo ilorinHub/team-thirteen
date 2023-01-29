@@ -4,10 +4,14 @@ export const theme = createTheme({
   // change MUI default theme
   palette: {
     primary: {
-      main: "#32D583",
+      main: "#0ABF53",
     },
     secondary: {
       main: "#50ADBB",
+    },
+    neutral: {
+      main: '#E2E8F0',
+      contrastText: '#475467',
     },
   },
 
@@ -23,7 +27,7 @@ export const theme = createTheme({
     },
 
     colors: {
-      primary: "#32D583", // green 400
+      primary: "#0ABF53", // green 400
       secondary: "#50ADBB", // cyan 600
       sec200: "#15AABF",
       sec100: "#306870",
