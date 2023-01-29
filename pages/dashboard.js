@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { Navbar } from '../src/components/dashboardComponents/navbar/Navbar';
 import { useFirestoreConnect } from 'react-redux-firebase';
+import { Home } from "../src/components/dashboardComponents/home/Home";
 
 const Dashboard = () => {
   const auth = useSelector((state) => state?.firebaseReducer?.auth);
@@ -12,7 +13,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (isLoaded(auth) && isEmpty(auth)) {
-      router.replace('/onboarding');
+      router.replace("/onboarding");
     }
   }, [auth, router]);
 
@@ -21,7 +22,7 @@ const Dashboard = () => {
   }
   return (
     <div>
-      <Navbar />
+      <Navbar mainContent={<Home />} />
     </div>
   );
 };

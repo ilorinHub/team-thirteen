@@ -151,6 +151,7 @@ export const MobileNavbar = ({ signOut }) => {
             color='inherit'
             aria-label='open drawer'
             sx={{ mr: 2 }}
+            onClick={props.handleDrawerToggle}
           >
             <MenuIcon />
           </IconButton>
