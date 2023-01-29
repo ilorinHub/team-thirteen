@@ -13,11 +13,16 @@ function SetupProfile({
   signedIn,
   displayName,
   handleContinue,
+  fromLogin,
 }) {
   return (
     <StyledSetupProfileWrapper>
       <div className='content'>
-        <h2>{signedIn ? 'Welcome to ProjeX' : 'Set up your profile'}</h2>
+        <h2>
+          {signedIn
+            ? 'Welcome to ProjeX'
+            : `${fromLogin ? 'Sign in to continue' : 'Set up your profile'}`}
+        </h2>
 
         <StyledSetupProfileFormWrapper>
           <form>

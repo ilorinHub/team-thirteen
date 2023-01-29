@@ -17,5 +17,13 @@ module.exports = {
     // ssr and displayName are configured by default
     styledComponents: true,
   },
-  ...nextConfig
-}
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+      },
+    ],
+  },
+  ...nextConfig,
+};
