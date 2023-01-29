@@ -17,16 +17,13 @@ const MenuProps = {
 };
 
 const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
+  'Mahmoud Mahmoud',
+  'Yusuf Abdulkarim',
+  'Yewande Palmer',
+  'Lawrence Dev',
+  'Yusuf Yusuf',
+  'Ridwan Bakare',
+  'Adeola Abdulrahman',
 ];
 
 function getStyles(name, personName, theme) {
@@ -41,17 +38,6 @@ function getStyles(name, personName, theme) {
 export default function SelectMembers({ selectedTeam, handleSelect }) {
 
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    );
-  };
 
   return (
     <FormControl sx={{ m: 1, width: 220 }} size='small'>

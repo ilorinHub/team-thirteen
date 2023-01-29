@@ -9,13 +9,12 @@ import {
   FormControl,
   FormHelperText,
   InputAdornment,
-  InputBase,
-  InputLabel,
   MenuItem,
   Select,
   TextField,
 } from '@mui/material';
 import SelectTeams from './SelectTeam';
+import { useSelector } from 'react-redux';
 
 export default function CreateProjectForm({
   projectData,
@@ -24,8 +23,25 @@ export default function CreateProjectForm({
   value,
   setValue,
 }) {
-  const { name, description, budget, startDate, endDate, status, team, tasks } =
-    projectData;
+  const { name, description, budget, status, team } = projectData;
+  const {
+    users,
+    workspace,
+    team: teams,
+    projects,
+  } = useSelector((state) => state.firestoreReducer.ordered);
+
+  console.log(
+    'users',
+    users,
+    'workspace',
+    workspace,
+    'teams',
+    teams,
+    'projects',
+    projects
+  );
+  
   return (
     <Box sx={{ display: 'flex', width: '100%', alignItems: 'flex-start' }}>
       <Box sx={{ marginRight: '30px', marginTop: '16px' }}>
