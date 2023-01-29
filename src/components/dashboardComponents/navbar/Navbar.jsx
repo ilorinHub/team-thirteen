@@ -6,7 +6,7 @@ import { MobileNavbar } from "./mobileNavbar/MobileNavbar";
 import Box from "@mui/material/Box";
 import { Sidebar } from "./sidebar/Sidebar";
 
-export const Navbar = ({ mainContent }) => {
+export const Navbar = ({ mainContent, handleSignOut }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {

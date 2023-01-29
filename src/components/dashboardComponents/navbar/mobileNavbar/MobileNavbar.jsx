@@ -30,7 +30,7 @@ import {
   StyledInputBase,
 } from '../Navbar.styled';
 
-export const MobileNavbar = ({ signOut }) => {
+export const MobileNavbar = ({ signOut, handleDrawerToggle }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const auth = useSelector((state) => state?.firebaseReducer?.auth);
   const { displayName, photoURL, email } = auth;
@@ -151,7 +151,7 @@ export const MobileNavbar = ({ signOut }) => {
             color='inherit'
             aria-label='open drawer'
             sx={{ mr: 2 }}
-            onClick={props.handleDrawerToggle}
+            onClick={handleDrawerToggle}
           >
             <MenuIcon />
           </IconButton>
