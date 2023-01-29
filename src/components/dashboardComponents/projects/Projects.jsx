@@ -16,6 +16,7 @@ import Stack from "@mui/material/Stack";
 import FormatListBulletedOutlinedIcon from "@mui/icons-material/FormatListBulletedOutlined";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import { FilterData } from "./data/data";
+import DataTable from "./table/DataTable";
 
 function Projects() {
   const [currView, setCurrView] = React.useState("list");
@@ -85,6 +86,8 @@ function Projects() {
           </Box>
         </StyledGroupAndView>
       </StyledTopOptions>
+
+      <DataTable />
     </StyledContainer>
   );
 }
